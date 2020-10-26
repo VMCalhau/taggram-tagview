@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taggram</title>
+
+    <!-- O normalize ajuda a reduzir a diferença de estilo entre os navegadores -->
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="index.js"></script>
+  </head>
+
+  <body class="body">
+    <header class="header">
+      <div class="logo"></div>
+      <div class="header__container">
+        <div class="current-user">
+          <div class="current-user__username" id="current-user-username"></div>
+          <div class="current-user__avatar" id="current-user-avatar"></div>
+        </div>
+      </div>
+    </header>
+    <div class="post">
+      <div class="photo" id="photo"></div>
+      <div class="photo-border"></div>
+      <div class="header-post">
+        <div class="author-avatar" id="author-avatar"></div>
+        <div class="author-info">
+          <div class="author-name" id="author-name"></div>
+          <div class="author-location" id="author-location"></div>
+        </div>
+        <div class="author-border"></div>
+      </div>
+      <div class="footer">
+        <div class="footer-border-begin"></div>
+        <div class="footer-statistics">
+          <div class="comments-number" id="comments-number"></div>
+          <div class="post-date" id="post-date"></div>
+        </div>
+        <div class="footer-border-end"></div>
+        <div class="field">
+          <input type="text" class="text" id="text">
+          <button  class="send-button" id="button">Enviar</button>
+        </div>
+      </div>
+      <div class="comments-list">
+        <div class="comments" id="comments"></div>
+      </div>
+    </div>
+    <div class="logo2"></div>
+  </body>
+</html>
