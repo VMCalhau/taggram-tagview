@@ -94,6 +94,14 @@
           window.alert("Comentário não foi enviado, tente novamente");
           return null;
         }
+        else if (response.status == 404) {
+          window.alert("Publicação não encontrada");
+          return null;
+        }
+        else if (response.status == 400) {
+          window.alert("Usuário inválido");
+          return null;
+        }
 
         return response.json();
     })
