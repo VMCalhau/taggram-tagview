@@ -72,39 +72,48 @@
   }
 
   function postComment() {
+    if (document.getElementById("text").value == "") {
+      window.alert("Digite algo para comentar");
+      return null;
+    }
+
     const data = {
       'username': user_logged,
       'message': document.getElementById("text").value 
     }
+
     return fetch(apiUrl + "/posts/" + uuid + "/comments", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify(data)
 
     }).then(function(response) {
-        if (!response.ok)
+        if (response.status == 500) {
           window.alert("Comentário não foi enviado, tente novamente");
+          return null;
+        }
 
         return response.json();
     })
     .then(function(comments) {
-      const new_comment = comments.length-1;
-      document.getElementById("comments").innerHTML += "<div class='comment'>" +
-                                "<div class='comment-author'>" + comments[new_comment].user.username.bold() + 
-                                " " + comments[new_comment].message +"</div>" +
-                                "<div class='comment-date'>" + 
-                                (new Date().getHours() - new Date(comments[new_comment].created_at).getHours()) +"h</div>" + 
-                                "<div class='comment-avatar' id='comment-avatar" + new_comment + "'></div>" +
-                                "</div>";
-      if (comments[new_comment].user.avatar) {
-        document.getElementById("comment-avatar" + new_comment).style.
-                backgroundImage = "url('" + comments[new_comment].user.avatar + "')";
+      if (comments != null) {
+        const new_comment = comments.length-1;
+        document.getElementById("comments").innerHTML += "<div class='comment'>" +
+                                  "<div class='comment-author'>" + comments[new_comment].user.username.bold() + 
+                                  " " + comments[new_comment].message +"</div>" +
+                                  "<div class='comment-date'>" + 
+                                  (new Date().getHours() - new Date(comments[new_comment].created_at).getHours()) +"h</div>" + 
+                                  "<div class='comment-avatar' id='comment-avatar" + new_comment + "'></div>" +
+                                  "</div>";
+        if (comments[new_comment].user.avatar) {
+          document.getElementById("comment-avatar" + new_comment).style.
+                  backgroundImage = "url('" + comments[new_comment].user.avatar + "')";
+        }
+        document.getElementById("text").value = "";
       }
-      document.getElementById("text").value = "";
-    });
+    })
   }
 
   function initialize() {
